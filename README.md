@@ -1,0 +1,3 @@
+# POC-Android
+
+Initial Structure
