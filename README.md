@@ -115,6 +115,16 @@ RealmQuery<User> query = context.where(User.class)
                 .equalTo("name",name);
 
         return  query.findFirst();
+```  
+
+**Save an user**
+```java
+context.beginTransaction();
+        User user = context.createObject(User.class);
+        user.setName(name);
+        user.setAge(age);
+        user.setSessionId(sessionID);
+        context.commitTransaction();
 ```
 
 
