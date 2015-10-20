@@ -139,16 +139,16 @@ Intent: The Job itself
 
 ### Code Structure Folder
 
-**activities**
+**activities**  
 Contains all the activities and fragments. Classes are all named with Activity or Fragment at the end. That way, you can immediately know what it is when reading Java code that doesn't have its full package name.  
 
-**api**
+**api**  
 Contains all classes related to syncing. I use a RestClient class to pull data from an HTTP API with OkHttp library. In this package, also are included the API definitions.
 
 **data**  
 Contains all classes related to data management and models for persistence. A StorageService class manage all the transactions.
 
-**helpers**
+**helpers**  
 Contains helper classes and constants. A helper class is a place to put code that is used in more than one place. Most of the methods are static.
 
 **models**
