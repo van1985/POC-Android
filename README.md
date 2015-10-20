@@ -5,7 +5,7 @@ Simple android example to show android and libraries capabilities.
 ## Getting Started  
 
 ### Libraries Used  
-android.support.design: `com.android.support:design:22.2.0+`
+android.support.design: `com.android.support:design:22.2.0+`  
 appcompat: `com.android.support:appcompat-v7:22.1.0+`  
 gson: `com.google.code.gson:gson:2.3`  
 retrofit: `com.squareup.retrofit:retrofit:2.0.0-beta2`  
