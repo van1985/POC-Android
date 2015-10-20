@@ -4,7 +4,8 @@ Simple android example to show android and libraries capabilities.
 
 ## Getting Started  
 
-### Libraries Used
+### Libraries Used  
+android.support.design: `com.android.support:design:22.2.0+`  
 appcompat: `com.android.support:appcompat-v7:22.1.0+`  
 gson: `com.google.code.gson:gson:2.3`  
 retrofit: `com.squareup.retrofit:retrofit:2.0.0-beta2`  
@@ -162,3 +163,13 @@ Contains all BroadcastReceiver definition. This classes will catch the response 
 **services**  
 Contains all IntentService definition.
 Contains Intent and IntentService 
+
+## Material Design
+
+For material design, we used the following libraries:  
+
+android.support.design: `com.android.support:design:22.2.0+`  
+appcompat: `com.android.support:appcompat-v7:22.1.0+`  
+
+###Login
+
