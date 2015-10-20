@@ -58,3 +58,24 @@ For this POC, we used 2.0 version that is a little different from 1.9. I ended u
             }
         });
 ```
+
+#### OkHttp
+
+OkHttp and Retrofit - which are projects from Square - can work together. OkHttp handles the lower-level HTTP connection details, while Retrofit simplifies using REST APIs. Retrofit can be used on top of OkHttp, but it is not required. For more details about OkHttp, follow this link: http://square.github.io/okhttp/
+
+For this case, I create an adapter that manage all the calls to the api. This adapter was made with OkHttp library.
+
+```java
+ OkHttpClient okClient = new OkHttpClient();
+            okClient.interceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Chain chain) throws IOException {
+                    Response response = chain.proceed(chain.request());
+                    return response;
+                }
+            });
+```
+
+OkHttp have a lot of features like: create interceptors and recipes, manage different types of connections (URLs, Addresses, Connections) among other things. For more information, take a look to the wiki.
+
+OkHttp Wiki: https://github.com/square/okhttp/wiki
