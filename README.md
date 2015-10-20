@@ -19,7 +19,7 @@ Retrofit turns your HTTP API into a Java interface. See the following link for m
 
 For this POC, we used 2.0 version that is a little different from 1.9. I ended using Retrofit in sync mode and execute the sync calls on an IntentService.
 
-`Sync Call`  
+**`Sync Call`**  
 ```java
         WeatherAPI service = RestClient.getClient();
         Call<WeatherData> call = service.getWeatherFromApiSync("London", appId);
@@ -31,7 +31,7 @@ For this POC, we used 2.0 version that is a little different from 1.9. I ended u
         }
 ```
 
-`Async Call`
+**`Async Call`**
 ```java
         WeatherAPI service = RestClient.getClient();
         Call<WeatherData> call = service.getWeatherFromApiSync("London", appId);
