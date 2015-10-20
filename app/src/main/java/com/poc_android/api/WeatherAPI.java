@@ -1,6 +1,6 @@
 package com.poc_android.api;
 
-import com.poc_android.model.WeatherData;
+import com.poc_android.models.WeatherData;
 
 import retrofit.Call;
 import retrofit.http.GET;

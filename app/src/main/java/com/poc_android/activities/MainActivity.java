@@ -1,4 +1,4 @@
-package com.poc_android;
+package com.poc_android.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,29 +6,17 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
-
-import com.google.gson.Gson;
-import com.poc_android.api.RestClient;
-import com.poc_android.api.WeatherAPI;
-import com.poc_android.constants.Constants;
-import com.poc_android.model.WeatherData;
+import com.poc_android.R;
+import com.poc_android.helpers.Constants;
 import com.poc_android.receivers.LoginReceiver;
 import com.poc_android.services.LoginService;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.OkHttpClient;
+import com.poc_android.data.StorageService;
 
-import java.io.IOException;
+import io.realm.Realm;
 
 
 public class MainActivity extends Activity {
@@ -58,6 +46,10 @@ public class MainActivity extends Activity {
         LocalBroadcastManager.getInstance(this).registerReceiver(
                 mLoginReceiver,
                 statusIntentFilter);
+
+        //Create an instance of Realm
+        Realm r=Realm.getInstance(this);
+        StorageService storageSrv = new StorageService(r);
 
     }
 

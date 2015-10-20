@@ -1,8 +1,11 @@
-package com.poc_android.model;
+package com.poc_android.models;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.List;
 
-public class WeatherData {
+public class WeatherData implements Parcelable{
     private Coord coord;
     private int cod;
     private String base;
@@ -18,6 +21,27 @@ public class WeatherData {
         this.name = name;
         this.main = main;
     }
+
+    public WeatherData(Parcel in) {
+        this.coord =in.readParcelable(Coord.class.getClassLoader());
+        this.cod = in.readInt();
+        this.base = in.readString();
+        this.name = in.readString();
+        this.main = in.readParcelable(Coord.class.getClassLoader());
+    }
+
+
+    public static final Creator<WeatherData> CREATOR = new Creator<WeatherData>() {
+        @Override
+        public WeatherData createFromParcel(Parcel in) {
+            return new WeatherData(in);
+        }
+
+        @Override
+        public WeatherData[] newArray(int size) {
+            return new WeatherData[size];
+        }
+    };
 
     public int getCod() {
         return cod;
@@ -59,7 +83,21 @@ public class WeatherData {
         this.main = main;
     }
 
-    class Main {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(cod);
+        dest.writeParcelable(coord,flags);
+        dest.writeString(base);
+        dest.writeString(name);
+        dest.writeParcelable(main, flags);
+    }
+
+    class Main implements Parcelable{
         double temp;
         double pressure;
         int humidity;
@@ -69,6 +107,24 @@ public class WeatherData {
             this.pressure = pressure;
             this.humidity = humidity;
         }
+
+        protected Main(Parcel in) {
+            temp = in.readDouble();
+            pressure = in.readDouble();
+            humidity = in.readInt();
+        }
+
+        public final Creator<Main> CREATOR = new Creator<Main>() {
+            @Override
+            public Main createFromParcel(Parcel in) {
+                return new Main(in);
+            }
+
+            @Override
+            public Main[] newArray(int size) {
+                return new Main[size];
+            }
+        };
 
         public double getTemp() {
             return temp;
@@ -93,9 +149,21 @@ public class WeatherData {
         public void setHumidity(int humidity) {
             this.humidity = humidity;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeDouble(temp);
+            dest.writeDouble(pressure);
+            dest.writeInt(humidity);
+        }
     }
 
-    class Coord {
+    class Coord implements Parcelable{
         double lat;
         double lon;
 
@@ -103,6 +171,23 @@ public class WeatherData {
             this.lat = lat;
             this.lon = lon;
         }
+
+        protected Coord(Parcel in) {
+            lat = in.readDouble();
+            lon = in.readDouble();
+        }
+
+        public final Creator<Coord> CREATOR = new Creator<Coord>() {
+            @Override
+            public Coord createFromParcel(Parcel in) {
+                return new Coord(in);
+            }
+
+            @Override
+            public Coord[] newArray(int size) {
+                return new Coord[size];
+            }
+        };
 
         public double getLat() {
             return lat;
@@ -119,9 +204,20 @@ public class WeatherData {
         public void setLon(double lon) {
             this.lon = lon;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeDouble(lat);
+            dest.writeDouble(lon);
+        }
     }
 
-    class Weather {
+    class Weather implements Parcelable{
         private int id;
         String main;
         String description;
@@ -136,6 +232,25 @@ public class WeatherData {
             this.description = description;
             this.icon = icon;
         }
+
+        protected Weather(Parcel in) {
+            id = in.readInt();
+            main = in.readString();
+            description = in.readString();
+            icon = in.readString();
+        }
+
+        public final Creator<Weather> CREATOR = new Creator<Weather>() {
+            @Override
+            public Weather createFromParcel(Parcel in) {
+                return new Weather(in);
+            }
+
+            @Override
+            public Weather[] newArray(int size) {
+                return new Weather[size];
+            }
+        };
 
         public int getId() {
             return id;
@@ -167,6 +282,19 @@ public class WeatherData {
 
         public void setIcon(String icon) {
             this.icon = icon;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(id);
+            dest.writeString(main);
+            dest.writeString(description);
+            dest.writeString(icon);
         }
     }
 

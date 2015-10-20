@@ -3,18 +3,16 @@ package com.poc_android.services;
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
-import com.google.gson.Gson;
 import com.poc_android.api.RestClient;
 import com.poc_android.api.WeatherAPI;
-import com.poc_android.constants.Constants;
-import com.poc_android.model.WeatherData;
+import com.poc_android.helpers.Constants;
+import com.poc_android.models.WeatherData;
+
+import java.io.IOException;
 
 import retrofit.Call;
-import retrofit.Callback;
 import retrofit.Response;
-import retrofit.Retrofit;
 
 /**
  * Created by vanden on 10/14/15.
@@ -30,7 +28,7 @@ public class LoginService extends IntentService {
         super("LoginService");
     }
 
-    private void BroadcastResult(String resultJSON){
+    private void BroadcastResult(WeatherData resultJSON){
         /*
          * Creates a new Intent containing a Uri object
          * BROADCAST_ACTION is a custom Intent action
@@ -38,7 +36,7 @@ public class LoginService extends IntentService {
         String status = "OK";
         Intent localIntent =
                 new Intent(Constants.BROADCAST_ACTION)
-                        .putExtra("data",resultJSON)
+                        .putExtra("data", resultJSON)
                         // Puts the status into the Intent
                         .putExtra(Constants.EXTENDED_DATA_STATUS, status);
         // Broadcasts the Intent to receivers in this app.
@@ -56,7 +54,13 @@ public class LoginService extends IntentService {
         WeatherAPI service = RestClient.getClient();
         String URL = "London"+appId;
         Call<WeatherData> call = service.getWeatherFromApiSync("London", appId);
-
+        try {
+            Response<WeatherData> response=call.execute();
+            BroadcastResult(response.body());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        /*
         call.enqueue(new Callback<WeatherData>() {
 
             @Override
@@ -80,6 +84,7 @@ public class LoginService extends IntentService {
                 System.out.println("Error: " + t.getMessage().toString());
             }
         });
+        */
 
 
     }

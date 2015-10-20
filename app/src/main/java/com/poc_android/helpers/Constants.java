@@ -1,4 +1,4 @@
-package com.poc_android.constants;
+package com.poc_android.helpers;
 
 /**
  * Created by vanden on 10/15/15.

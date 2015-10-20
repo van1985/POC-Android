@@ -39,7 +39,6 @@ public class RestClient {
                     .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                             .client(okClient)
-                            .addConverterFactory(GsonConverterFactory.create())
                             .build();
             weatherApiInterface = client.create(WeatherAPI.class);
         }
