@@ -14,3 +14,7 @@ okhttp: `com.squareup.okhttp:okhttp:2.4.0`
 *We used Android Studio for develop this POC.*
 
 #### Retrofit
+
+Retrofit turns your HTTP API into a Java interface. See the following link for more information: http://square.github.io/retrofit/  
+
+For this POC, we used 2.0 version that is a little different from 1.9. I ended using Retrofit in sync mode and execute the sync calls on an IntentService.
