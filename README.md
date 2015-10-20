@@ -151,7 +151,7 @@ Contains all classes related to data management and models for persistence. A St
 **helpers**  
 Contains helper classes and constants. A helper class is a place to put code that is used in more than one place. Most of the methods are static.
 
-**models**
+**models**  
 Contains all local models. When syncing from an HTTP API I parse the JSON into these Java objects using GSON and implementing Parcelable interface.
 
 **receivers**  
