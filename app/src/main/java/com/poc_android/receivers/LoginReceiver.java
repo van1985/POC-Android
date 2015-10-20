@@ -19,6 +19,7 @@ public class LoginReceiver extends BroadcastReceiver {
 
     // Called when the BroadcastReceiver gets an Intent it's registered to receive
     public void onReceive(Context context, Intent intent) {
-        System.out.println("Service return");
+
+        System.out.println("Service return "+intent.getStringExtra("data"));
     }
 }

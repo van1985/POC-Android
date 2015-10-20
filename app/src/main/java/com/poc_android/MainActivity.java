@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
     // An instance of the status broadcast receiver
     private LoginReceiver mLoginReceiver;
     protected final String TAG = getClass().getSimpleName();
-    private static String appId = "bd82977b86bf27fb59a04b61b657fb6f";
+
 
 
     @Override
@@ -58,32 +58,6 @@ public class MainActivity extends Activity {
         LocalBroadcastManager.getInstance(this).registerReceiver(
                 mLoginReceiver,
                 statusIntentFilter);
-
-        WeatherAPI service = RestClient.getClient();
-        String URL = "London"+appId;
-        Call<WeatherData> call = service.getWeatherFromApiSync("London",appId);
-        call.enqueue(new Callback<WeatherData>() {
-
-            @Override
-            public void onResponse(Response<WeatherData> response, Retrofit retrofit) {
-                Log.d("MainActivity", "Status Code = " + response.code());
-                if (response.isSuccess()) {
-                    // request successful (status code 200, 201)
-                    WeatherData result = response.body();
-                    Log.d("MainActivity", "response = " + new Gson().toJson(result));
-                } else {
-                    // response received but request not successful (like 400,401,403 etc)
-                    //Handle errors
-
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                System.out.println("Error: "+t.getMessage().toString());
-            }
-        });
-
 
     }
 
