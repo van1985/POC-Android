@@ -78,4 +78,12 @@ For this case, I create a clienta that manage all the calls that the app make to
 
 OkHttp have a lot of features like: create interceptors and recipes, manage different types of connections (URLs, Addresses, Connections) among other things. For more information, take a look to the wiki.
 
-OkHttp Wiki: https://github.com/square/okhttp/wiki
+OkHttp Wiki: https://github.com/square/okhttp/wiki  
+
+### Android Project Structure: The Team
+
+Android Projects have a few key elements and each has a role to play:
+Java: The Professional
+Resources: The Artist
+AndroidManifest.xml: The Boss
+Intent: The Job itself
