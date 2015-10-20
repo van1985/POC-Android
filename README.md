@@ -128,7 +128,9 @@ context.beginTransaction();
 ```
 
 
-### Android Project Structure: The Team
+## Android Project Structure
+
+###The Team
 
 Android Projects have a few key elements and each has a role to play:   
 
