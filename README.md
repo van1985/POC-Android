@@ -172,5 +172,5 @@ android.support.design: `com.android.support:design:22.2.0+`
 appcompat: `com.android.support:appcompat-v7:22.1.0+`  
 
 ###Login
-<img src="https://github.com/van1985/POC-Android/blob/master/img/login-img1.png" style="width:200px"/>
+<img src="https://github.com/van1985/POC-Android/blob/master/img/login-img1.png" width="500px" height="800px"/>
 ![Alt text](https://github.com/van1985/POC-Android/blob/master/img/login-img1.png =250x "")
