@@ -1,4 +1,4 @@
-# POC-Android
+# POC-Android [Under development]
 
 Simple android example to show android and libraries capabilities.
 
@@ -135,4 +135,28 @@ Android Projects have a few key elements and each has a role to play:
 Java: The Professional  
 Resources: The Artist  
 AndroidManifest.xml: The Boss  
-Intent: The Job itself  
+Intent: The Job itself 
+
+### Code Structure Folder
+
+**activities**
+Contains all the activities and fragments. Classes are all named with Activity or Fragment at the end. That way, you can immediately know what it is when reading Java code that doesn't have its full package name.  
+
+**api**
+Contains all classes related to syncing. I use a RestClient class to pull data from an HTTP API with OkHttp library. In this package, also are included the API definitions.
+
+**data**  
+Contains all classes related to data management and models for persistence. A StorageService class manage all the transactions.
+
+**helpers**
+Contains helper classes and constants. A helper class is a place to put code that is used in more than one place. Most of the methods are static.
+
+**models**
+Contains all local models. When syncing from an HTTP API I parse the JSON into these Java objects using GSON and implementing Parcelable interface.
+
+**receivers**  
+Contains all BroadcastReceiver definition. This classes will catch the response from IntentService that run in background.
+
+**services**  
+Contains all IntentService definition.
+Contains Intent and IntentService 
