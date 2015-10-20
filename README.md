@@ -31,7 +31,8 @@ For this POC, we used 2.0 version that is a little different from 1.9. I ended u
         }
 ```
 
-**`Async Call`** ######(Not used in the POC)*
+**`Async Call`** 
+######(Not used in the POC)
 ```java
         WeatherAPI service = RestClient.getClient();
         Call<WeatherData> call = service.getWeatherFromApiSync("London", appId);
