@@ -47,9 +47,9 @@ public class MainActivity extends Activity {
                 mLoginReceiver,
                 statusIntentFilter);
 
-        //Create an instance of Realm
+        //Create an instance of Realm and assign to StorageService
         Realm r=Realm.getInstance(this);
-        StorageService storageSrv = new StorageService(r);
+        StorageService.setContext(r);
 
     }
 
@@ -80,6 +80,10 @@ public class MainActivity extends Activity {
     Intent mServiceIntent;
     public void login(View view) {
         System.out.println("Login button");
+        /*
+        Test Realm.io library
+         */
+        StorageService.saveUser("Leandro",30,123456);
         /*
          * Creates a new Intent to start the LoginService
          * IntentService. Passes a URI in the

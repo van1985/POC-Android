@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.poc_android.data.StorageService;
+import com.poc_android.data.User;
 import com.poc_android.models.WeatherData;
 
 /**
@@ -21,5 +23,7 @@ public class LoginReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         WeatherData d=(WeatherData)intent.getParcelableExtra("data");
         System.out.println("Service return ");
+        User user = StorageService.getUser("Leandro");
+        System.out.println("Username: "+user.getName()+" age: "+user.getAge()+ "sessionId: "+user.getSessionId());
     }
 }
