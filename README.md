@@ -82,8 +82,9 @@ OkHttp Wiki: https://github.com/square/okhttp/wiki
 
 ### Android Project Structure: The Team
 
-Android Projects have a few key elements and each has a role to play:
-Java: The Professional
-Resources: The Artist
-AndroidManifest.xml: The Boss
-Intent: The Job itself
+Android Projects have a few key elements and each has a role to play:   
+
+Java: The Professional  
+Resources: The Artist  
+AndroidManifest.xml: The Boss  
+Intent: The Job itself  
