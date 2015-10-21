@@ -4,10 +4,10 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
+import com.poc_android.api.MockyAPI;
 import com.poc_android.api.RestClient;
-import com.poc_android.api.WeatherAPI;
 import com.poc_android.helpers.Constants;
-import com.poc_android.models.WeatherData;
+import com.poc_android.models.UserData;
 
 import java.io.IOException;
 
@@ -19,7 +19,6 @@ import retrofit.Response;
  */
 public class LoginService extends IntentService {
 
-    private static String appId = "bd82977b86bf27fb59a04b61b657fb6f";
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
      *
@@ -28,7 +27,7 @@ public class LoginService extends IntentService {
         super("LoginService");
     }
 
-    private void BroadcastResult(WeatherData resultJSON){
+    private void BroadcastResult(UserData resultJSON){
         /*
          * Creates a new Intent containing a Uri object
          * BROADCAST_ACTION is a custom Intent action
@@ -46,46 +45,18 @@ public class LoginService extends IntentService {
     @Override
     protected void onHandleIntent(Intent workIntent) {
         // Gets data from the incoming Intent
-        String dataString = workIntent.getDataString();
-        //...
-        // Do work here, based on the contents of dataString
-        //...
-
-        WeatherAPI service = RestClient.getClient();
-        String URL = "London"+appId;
-        Call<WeatherData> call = service.getWeatherFromApiSync("London", appId);
+        UserData userData = (UserData)workIntent.getParcelableExtra("userData");
+        MockyAPI service = RestClient.getMockyAPIClient();
+        Call<UserData> call = service.LoginApiSync(/*
+        userData.getUsername(),
+        userDate.getPassword()*/
+        );
         try {
-            Response<WeatherData> response=call.execute();
+            Response<UserData> response=call.execute();
             BroadcastResult(response.body());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*
-        call.enqueue(new Callback<WeatherData>() {
-
-            @Override
-            public void onResponse(Response<WeatherData> response, Retrofit retrofit) {
-                Log.d("MainActivity", "Status Code = " + response.code());
-                if (response.isSuccess()) {
-                    // request successful (status code 200, 201)
-                    WeatherData result = response.body();
-                    String resultJSON = new Gson().toJson(result);
-                    Log.d("MainActivity", "response = " + resultJSON);
-                    BroadcastResult(resultJSON);
-                } else {
-                    // response received but request not successful (like 400,401,403 etc)
-                    //Handle errors
-
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                System.out.println("Error: " + t.getMessage().toString());
-            }
-        });
-        */
-
 
     }
 }

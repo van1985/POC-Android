@@ -14,35 +14,57 @@ import retrofit.Converter;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
-/**
- * Created by vanden on 10/19/15.
- */
-
 public class RestClient {
 
     private static WeatherAPI weatherApiInterface ;
-    private static String baseUrl = "http://api.openweathermap.org" ;
+    private static MockyAPI mockyApiInterface ;
+    private static String baseUrlWeatherAPI = "http://api.openweathermap.org";
+    private static String baseUrlMockyAPI ="http://www.mocky.io";
+    private static OkHttpClient okClient;
 
-    public static WeatherAPI getClient() {
+    private static void createOKClient(){
+
+        //Set globant Proxy for make API calls inside Globant Company
+        //TODO: Change the location of this code
+        System.setProperty("http.proxyHost", "proxy.corp.globant.com");
+        System.setProperty("http.proxyPort", "3128");
+
+        okClient = new OkHttpClient();
+        okClient.interceptors().add(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Response response = chain.proceed(chain.request());
+                return response;
+            }
+        });
+    }
+
+    public static WeatherAPI getWeatherAPIClient() {
+        if (okClient == null)
+            createOKClient();
         if (weatherApiInterface == null) {
-
-            OkHttpClient okClient = new OkHttpClient();
-            okClient.interceptors().add(new Interceptor() {
-                @Override
-                public Response intercept(Chain chain) throws IOException {
-                    Response response = chain.proceed(chain.request());
-                    return response;
-                }
-            });
-
             Retrofit client = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
+                    .baseUrl(baseUrlWeatherAPI)
                     .addConverterFactory(GsonConverterFactory.create())
                             .client(okClient)
                             .build();
             weatherApiInterface = client.create(WeatherAPI.class);
         }
         return weatherApiInterface ;
+    }
+
+    public static MockyAPI getMockyAPIClient() {
+        if (okClient == null)
+            createOKClient();
+        if (mockyApiInterface == null) {
+            Retrofit client = new Retrofit.Builder()
+                    .baseUrl(baseUrlMockyAPI)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(okClient)
+                    .build();
+            mockyApiInterface = client.create(MockyAPI.class);
+        }
+        return mockyApiInterface ;
     }
 }
 
