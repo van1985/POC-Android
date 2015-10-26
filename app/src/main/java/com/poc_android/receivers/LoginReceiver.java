@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.poc_android.activities.LoginActivity;
 import com.poc_android.activities.MainActivity;
 import com.poc_android.data.StorageService;
 import com.poc_android.data.User;
@@ -24,7 +25,7 @@ public class LoginReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         //Create an intent for MainActivity activity
-        Intent intentLoginReceiver = new Intent(context, MainActivity.class);
+        Intent intentLoginReceiver = new Intent(context, LoginActivity.class);
         intentLoginReceiver.putExtra("userData",(UserData)intent.getParcelableExtra("data"));
         intentLoginReceiver.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intentLoginReceiver.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

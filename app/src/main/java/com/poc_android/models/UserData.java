@@ -48,6 +48,8 @@ public class UserData implements Parcelable {
         this.username = user;
     }
 
+    public int getUserID(){ return this.userID; }
+
     public static final Creator<UserData> CREATOR = new Creator<UserData>() {
         @Override
         public UserData createFromParcel(Parcel in) {
