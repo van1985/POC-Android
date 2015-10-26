@@ -32,7 +32,7 @@ public class LoginReceiver extends BroadcastReceiver {
         System.out.println("Service return ");
         //Storage Service
         User user = StorageService.getUser("Leandro");
-        System.out.println("Username: "+user.getName()+" age: "+user.getAge()+ "sessionId: "+user.getSessionId());
+        if (user!=null) System.out.println("Username: "+user.getName()+" age: "+user.getAge()+ "sessionId: "+user.getSessionId());
         context.startActivity(intentLoginReceiver);
     }
 }

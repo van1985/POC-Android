@@ -26,8 +26,8 @@ public class RestClient {
 
         //Set globant Proxy for make API calls inside Globant Company
         //TODO: Change the location of this code
-        System.setProperty("http.proxyHost", "proxy.corp.globant.com");
-        System.setProperty("http.proxyPort", "3128");
+        //System.setProperty("http.proxyHost", "proxy.corp.globant.com");
+        //System.setProperty("http.proxyPort", "3128");
 
         okClient = new OkHttpClient();
         okClient.interceptors().add(new Interceptor() {
