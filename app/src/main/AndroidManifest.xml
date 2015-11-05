@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Your Fabric API Key will be automatically generated when you use the Fabric plugin -->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="0b54de24a469ab797c0898099a22ede36ed0fa59"
+            />
         <activity
             android:name=".activities.LoginActivity"
             android:theme="@style/AppTheme.Dark" />

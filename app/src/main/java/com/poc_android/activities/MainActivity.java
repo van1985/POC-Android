@@ -7,8 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.ndk.CrashlyticsNdk;
 import com.poc_android.R;
 import com.poc_android.receivers.LoginReceiver;
+import io.fabric.sdk.android.Fabric;
 
 
 public class MainActivity extends Activity {
@@ -25,9 +28,15 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //getActionBar().hide();
         setContentView(R.layout.activity_login);
-
+        final Fabric fabric = new Fabric.Builder(this)
+                .kits(new Crashlytics())
+                //.kits(new CrashlyticsNdk()) TODO: SABER QUE ES CrashlyticsNdk()
+                .debuggable(true)
+                .build();
+        Fabric.with(fabric);
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
 
