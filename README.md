@@ -174,3 +174,10 @@ appcompat: `com.android.support:appcompat-v7:22.1.0+`
 ###Login
 <img src="https://github.com/van1985/POC-Android/blob/master/img/login-img1.png" width="300px" height="600px"/>
 <img src="https://github.com/van1985/POC-Android/blob/master/img/login-img2.png" width="300px" height="600px"/>
+
+## Fabric
+
+### Crashlytics
+On the Android side, we analyze your crashes and automatically deobfuscates stack traces, beginning with on-device exception handling. Once the crash report reaches our system, we process the stack frames against your application’s mapping file that was automatically uploaded to our servers at build time.
+
+More info: https://fabric.io/kits/android/crashlytics/summary
