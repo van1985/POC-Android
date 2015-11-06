@@ -180,7 +180,7 @@ appcompat: `com.android.support:appcompat-v7:22.1.0+`
 
 ### Crashlytics
 On the Android side, we analyze your crashes and automatically deobfuscates stack traces, beginning with on-device exception handling. Once the crash report reaches our system, we process the stack frames against your application’s mapping file that was automatically uploaded to our servers at build time.
-#### Install Fabric plugin for AS
+#### Install Fabric plugin for Android Studio
 Installing this the plugin adds everything you need in order to start Crashlitycs tracking.
 
 #### Add in Manifest
