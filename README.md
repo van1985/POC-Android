@@ -196,7 +196,6 @@ Installing this the plugin adds everything you need in order to start Crashlityc
 ```java
 final Fabric fabric = new Fabric.Builder(this)
                 .kits(new Crashlytics())
-                //.kits(new CrashlyticsNdk()) TODO: SABER QUE ES CrashlyticsNdk()
                 .debuggable(true)
                 .build();
         Fabric.with(fabric);
