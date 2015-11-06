@@ -263,5 +263,3 @@ Next, we'll override ```onActivityResult()``` to get the scan result.
         mTextView.setText(resultStr);
     }
 ```
- 
->>>>>>> 1b2f404851f4a7f86511fa8eed370f39964dce37
