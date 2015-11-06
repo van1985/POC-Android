@@ -17,7 +17,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        wallmart{
+            applicationId = "com.poc_android"
+        }
+        chango{
+            applicationId = "com.poc_android.chango"
+        }
+    }
+
+
 }
+
 
 dependencies {
     compile "com.android.support:design:22.2.0+"
