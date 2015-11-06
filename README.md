@@ -175,5 +175,65 @@ appcompat: `com.android.support:appcompat-v7:22.1.0+`
 <img src="https://github.com/van1985/POC-Android/blob/master/img/login-img1.png" width="300px" height="600px"/>
 <img src="https://github.com/van1985/POC-Android/blob/master/img/login-img2.png" width="300px" height="600px"/>
 
+## card.io SDK for Android
+card.io provides fast, easy credit card scanning in mobile apps.
 
+####Add in build.gradle
+ ```
+ compile 'io.card:android-sdk:5.1.2'
+ ```
+ 
+####Add in AndroidManifest
+ ```
+     <!-- Permission to use camera - required -->
+     <uses-permission android:name="android.permission.CAMERA" />
+ 
+     <!-- Camera features - recommended -->
+     <uses-feature android:name="android.hardware.camera" android:required="false" />
+     <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+     <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+ ```
+ 
+### Sample code
+
+First, we'll assume that you're going to launch the scanner from a button called ```onScanPress(Vie view)``` 
+Then, add the method as:
+```java 
+    private void onScanPress(View v) {
+                Intent scanIntent = new Intent(getActivity(), CardIOActivity.class);
+                scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true); // default: false
+                scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, false); // default: false
+                scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, false); // default: false
+                // hides the manual entry button
+                // if set, developers should provide their own manual entry mechanism in the app
+                scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY, false); // default: false
+                scanIntent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, true);
+                // matches the theme of your application
+                scanIntent.putExtra(CardIOActivity.EXTRA_KEEP_APPLICATION_THEME, false); // default: false
+        
+                // MY_SCAN_REQUEST_CODE is arbitrary and is only used within this activity.
+                startActivityForResult(scanIntent, MY_SCAN_REQUEST_CODE);
+    }
+``` 
+
+Next, we'll override ```onActivityResult()``` to get the scan result.
+
+```java
+ @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        String resultStr;
+
+        if(data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
+            CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
+
+            resultStr = "Card Number: " + scanResult.getRedactedCardNumber();
+        } else {
+            resultStr = getResources().getString(R.string.scan_result_cancel_text);
+        }
+
+        mTextView.setText(resultStr);
+    }
+```
  
