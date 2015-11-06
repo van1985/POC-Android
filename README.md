@@ -180,7 +180,27 @@ appcompat: `com.android.support:appcompat-v7:22.1.0+`
 
 ### Crashlytics
 On the Android side, we analyze your crashes and automatically deobfuscates stack traces, beginning with on-device exception handling. Once the crash report reaches our system, we process the stack frames against your application’s mapping file that was automatically uploaded to our servers at build time.
+#### Install Fabric plugin for AS
+Installing this the plugin adds everything you need in order to start Crashlitycs tracking.
 
+#### Add in Manifest
+```xml
+<!-- Your Fabric API Key will be automatically generated when you use the Fabric plugin -->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="FabricAPIkey"
+            />
+```
+
+#### Add in MainActivity
+```java
+final Fabric fabric = new Fabric.Builder(this)
+                .kits(new Crashlytics())
+                //.kits(new CrashlyticsNdk()) TODO: SABER QUE ES CrashlyticsNdk()
+                .debuggable(true)
+                .build();
+        Fabric.with(fabric);
+```
 More info: https://fabric.io/kits/android/crashlytics/summary
 
 ## card.io SDK for Android
