@@ -263,3 +263,23 @@ Next, we'll override ```onActivityResult()``` to get the scan result.
         mTextView.setText(resultStr);
     }
 ```
+
+## Build Variants - Product flavors
+A product flavor defines a customized version of the application build by the project. A single project can have different flavors which change the generated application.
+
+You must write on your ```build.gradle``` which flavors you want to define:
+
+```
+productFlavors {  
+        ...
+        devel {
+            applicationId "com.poc_android.devel"
+        }
+
+        prod {
+            applicationId "com.poc_android"
+        }
+    }
+```
+
+
