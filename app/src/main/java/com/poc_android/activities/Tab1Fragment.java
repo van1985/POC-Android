@@ -1,6 +1,7 @@
 package com.poc_android.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -56,8 +57,9 @@ public class Tab1Fragment extends Fragment {
         scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY, false); // default: false
         scanIntent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, true);
         // matches the theme of your application
-        scanIntent.putExtra(CardIOActivity.EXTRA_KEEP_APPLICATION_THEME, false); // default: false
-
+        scanIntent.putExtra(CardIOActivity.EXTRA_KEEP_APPLICATION_THEME, true); // default: false
+        //if set, we can change the color lines. In this case we use GRAY. It uses Android Colors.
+        scanIntent.putExtra(CardIOActivity.EXTRA_GUIDE_COLOR, Color.GRAY);
         // MY_SCAN_REQUEST_CODE is arbitrary and is only used within this activity.
         startActivityForResult(scanIntent, MY_SCAN_REQUEST_CODE);
     }
