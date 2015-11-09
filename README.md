@@ -282,4 +282,27 @@ productFlavors {
     }
 ```
 
+Also in our ```build.gradle``` we have two differents ```buildTypes``` so we don't track for debug mode:
 
+```buildTypes {
+           release {
+               ...
+               buildConfigField "boolean", "USE_CRASHLYTICS", "true"
+           }
+           debug {
+               buildConfigField "boolean", "USE_CRASHLYTICS", "false"
+           }
+       }
+```
+
+In ```MainActivity``` add:
+```java
+if (BuildConfig.USE_CRASHLYTICS) {
+            final Fabric fabric = new Fabric.Builder(this)
+                    .kits(new Crashlytics())
+                    .debuggable(true)
+                    .build();
+            Fabric.with(fabric);
+        }
+```
+Depending which BuildType we are using, we will track with Crashlytics or not.
