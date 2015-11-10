@@ -174,3 +174,137 @@ appcompat: `com.android.support:appcompat-v7:22.1.0+`
 ###Login
 <img src="https://github.com/van1985/POC-Android/blob/master/img/login-img1.png" width="300px" height="600px"/>
 <img src="https://github.com/van1985/POC-Android/blob/master/img/login-img2.png" width="300px" height="600px"/>
+
+
+## Fabric
+
+### Crashlytics
+On the Android side, we analyze your crashes and automatically deobfuscates stack traces, beginning with on-device exception handling. Once the crash report reaches our system, we process the stack frames against your application’s mapping file that was automatically uploaded to our servers at build time.
+#### Install Fabric plugin for Android Studio
+Installing this the plugin adds everything you need in order to start Crashlitycs tracking.
+
+#### Add in Manifest
+```xml
+<!-- Your Fabric API Key will be automatically generated when you use the Fabric plugin -->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="FabricAPIkey"
+            />
+```
+
+#### Add in MainActivity
+```java
+final Fabric fabric = new Fabric.Builder(this)
+                .kits(new Crashlytics())
+                .debuggable(true)
+                .build();
+        Fabric.with(fabric);
+```
+More info: https://fabric.io/kits/android/crashlytics/summary
+
+## card.io SDK for Android
+card.io provides fast, easy credit card scanning in mobile apps.
+
+####Add in build.gradle
+ ```
+ compile 'io.card:android-sdk:5.1.2'
+ ```
+ 
+####Add in AndroidManifest
+ ```
+     <!-- Permission to use camera - required -->
+     <uses-permission android:name="android.permission.CAMERA" />
+ 
+     <!-- Camera features - recommended -->
+     <uses-feature android:name="android.hardware.camera" android:required="false" />
+     <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+     <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+ ```
+ 
+### Sample code
+
+First, we'll assume that you're going to launch the scanner from a button called ```onScanPress(Vie view)``` 
+Then, add the method as:
+```java 
+    private void onScanPress(View v) {
+                Intent scanIntent = new Intent(getActivity(), CardIOActivity.class);
+                scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true); // default: false
+                scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, false); // default: false
+                scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, false); // default: false
+                // hides the manual entry button
+                // if set, developers should provide their own manual entry mechanism in the app
+                scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY, false); // default: false
+                scanIntent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, true);
+                // matches the theme of your application
+                scanIntent.putExtra(CardIOActivity.EXTRA_KEEP_APPLICATION_THEME, false); // default: false
+        
+                // MY_SCAN_REQUEST_CODE is arbitrary and is only used within this activity.
+                startActivityForResult(scanIntent, MY_SCAN_REQUEST_CODE);
+    }
+``` 
+
+Next, we'll override ```onActivityResult()``` to get the scan result.
+
+```java
+ @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        String resultStr;
+
+        if(data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
+            CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
+
+            resultStr = "Card Number: " + scanResult.getRedactedCardNumber();
+        } else {
+            resultStr = getResources().getString(R.string.scan_result_cancel_text);
+        }
+
+        mTextView.setText(resultStr);
+    }
+```
+
+## Build Variants - Product flavors
+A product flavor defines a customized version of the application build by the project. A single project can have different flavors which change the generated application.
+
+You must write on your ```build.gradle``` which flavors you want to define:
+
+```
+productFlavors {  
+        ...
+        devel {
+            applicationId "com.poc_android.devel"
+        }
+
+        prod {
+            applicationId "com.poc_android"
+        }
+    }
+```
+
+Also in our ```build.gradle``` we have two differents ```buildTypes``` so we don't track for debug mode:
+
+``` 
+buildTypes {
+           release {
+               ...
+               buildConfigField "boolean", "USE_CRASHLYTICS", "true"
+           }
+           debug {
+               buildConfigField "boolean", "USE_CRASHLYTICS", "false"
+           }
+       }
+```
+
+In ```MainActivity``` add:
+
+```java
+if (BuildConfig.USE_CRASHLYTICS) {
+            final Fabric fabric = new Fabric.Builder(this)
+                    .kits(new Crashlytics())
+                    .debuggable(true)
+                    .build();
+            Fabric.with(fabric);
+        }
+```
+Depending which BuildType we are using, we will track with Crashlytics or not.
