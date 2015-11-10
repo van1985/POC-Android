@@ -263,3 +263,48 @@ Next, we'll override ```onActivityResult()``` to get the scan result.
         mTextView.setText(resultStr);
     }
 ```
+
+## Build Variants - Product flavors
+A product flavor defines a customized version of the application build by the project. A single project can have different flavors which change the generated application.
+
+You must write on your ```build.gradle``` which flavors you want to define:
+
+```
+productFlavors {  
+        ...
+        devel {
+            applicationId "com.poc_android.devel"
+        }
+
+        prod {
+            applicationId "com.poc_android"
+        }
+    }
+```
+
+Also in our ```build.gradle``` we have two differents ```buildTypes``` so we don't track for debug mode:
+
+``` 
+buildTypes {
+           release {
+               ...
+               buildConfigField "boolean", "USE_CRASHLYTICS", "true"
+           }
+           debug {
+               buildConfigField "boolean", "USE_CRASHLYTICS", "false"
+           }
+       }
+```
+
+In ```MainActivity``` add:
+
+```java
+if (BuildConfig.USE_CRASHLYTICS) {
+            final Fabric fabric = new Fabric.Builder(this)
+                    .kits(new Crashlytics())
+                    .debuggable(true)
+                    .build();
+            Fabric.with(fabric);
+        }
+```
+Depending which BuildType we are using, we will track with Crashlytics or not.
