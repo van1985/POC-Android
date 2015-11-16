@@ -7,4 +7,10 @@
     <string name="button_scan">Scan Credit Card</string>
     <string name="scan_result_text">Here is gonna be the credit card number!</string>
     <string name="scan_result_cancel_text">Scan was canceled!</string>
+    <string name="title_activity_screen_slide">ScreenSlideActivity</string>
+    <string name="text_first_fragment">First Fragment!</string>
+    <string name="text_second_fragment">Second Fragment!</string>
+    <string name="text_third_fragment">Third Fragment!</string>
+    <string name="slide_button_skip">SKIP</string>
+    <string name="slide_button_done">DONE</string>
 </resources>
